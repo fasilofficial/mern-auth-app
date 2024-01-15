@@ -6,6 +6,10 @@ import generateToken from "../utils/generateToken.js";
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+  if (email.length === 0 && password.length === 0) {
+    throw new Error("Please enter email and password");
+    return;
+  }
   const user = await User.findOne({ email });
   if (user && (await user.matchPasswords(password))) {
     if (!user.blocked) {
@@ -14,7 +18,7 @@ const authUser = asyncHandler(async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        avatar: user.avatar
+        avatar: user.avatar,
       });
     } else {
       res.status(400);
@@ -44,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      avatar: user.avatar
+      avatar: user.avatar,
     });
   } else {
     res.status(400);
@@ -62,7 +66,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     _id: req.user._id,
     name: req.user.name,
     email: req.user.email,
-    avatar: req.user.avatar
+    avatar: req.user.avatar,
   };
   res.status(200).json(user);
 });
@@ -74,8 +78,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.avatar = req.body.avatar || user.avatar;
-
-
 
     if (req.body.password) {
       user.password = req.body.password;
