@@ -10,15 +10,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
 // screens
-import HomeScreen from "./screens/HomeScreen.jsx";
-import LoginScreen from "./screens/LoginScreen.jsx";
-import RegisterScreen from "./screens/RegisterScreen.jsx";
-import ProfileScreen from "./screens/ProfileScreen.jsx";
-import AdminScreen from "./screens/AdminScreen.jsx";
-import AdminLoginScreen from "./screens/AdminLoginScreen.jsx";
-import AdminRegisterScreen from "./screens/AdminRegisterScreen.jsx";
-import EditUserScreen from "./screens/EditUserScreen.jsx";
-import AddUserScreen from "./screens/AddUserScreen.jsx";
+import HomeScreen from "./screens/user/HomeScreen.jsx";
+import LoginScreen from "./screens/user/LoginScreen.jsx";
+import RegisterScreen from "./screens/user/RegisterScreen.jsx";
+import ProfileScreen from "./screens/user/ProfileScreen.jsx";
+import AdminScreen from "./screens/admin/AdminScreen.jsx";
+import AdminLoginScreen from "./screens/admin/AdminLoginScreen.jsx";
+import AdminRegisterScreen from "./screens/admin/AdminRegisterScreen.jsx";
+import EditUserScreen from "./screens/admin/EditUserScreen.jsx";
+import AddUserScreen from "./screens/admin/AddUserScreen.jsx";
 
 // components
 import App from "./App.jsx";
