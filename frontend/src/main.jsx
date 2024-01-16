@@ -6,7 +6,6 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import App from "./App.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -22,6 +21,7 @@ import EditUserScreen from "./screens/EditUserScreen.jsx";
 import AddUserScreen from "./screens/AddUserScreen.jsx";
 
 // components
+import App from "./App.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import AdminPrivateRoute from "./components/AdminPrivateRoute.jsx";
 

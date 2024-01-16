@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Form, Button, Row, Col, Image } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Form, Button, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-
-import FormContainer from "../components/FormContainer";
-import Loader from "../components/Loader";
 import { toast } from "react-toastify";
-import { useEditUserMutation } from "../slices/adminApiSlice";
-import { useUpdateUserMutation } from "../slices/usersApiSlice";
-import { setEditUserCredentials } from "../slices/editUserSlice";
+import { useEditUserMutation } from "../../slices/adminApiSlice";
+import { setEditUserCredentials } from "../../slices/editUserSlice";
+import FormContainer from "../../components/FormContainer";
 
 const EditUserScreen = () => {
   const [name, setName] = useState("");
@@ -20,8 +17,6 @@ const EditUserScreen = () => {
   const [editUser, { userLoading, error }] = useEditUserMutation();
 
   const { editUserInfo } = useSelector((state) => state.editUserInfo);
-
-  // const [updateProfile, { isLoading }] = useUpdateUserMutation();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,14 +33,11 @@ const EditUserScreen = () => {
       toast.error("Please select an image first.");
       return;
     }
-
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "z0o48jjp");
     data.append("cloud_name", "fasils");
-
     setImageUploading(true);
-
     const response = await fetch(
       "https://api.cloudinary.com/v1_1/fasils/image/upload",
       {
@@ -53,20 +45,15 @@ const EditUserScreen = () => {
         body: data,
       }
     );
-
     const responseBody = await response.text();
-
     try {
       const responseData = JSON.parse(responseBody);
-
       if (!response.ok) {
         toast.error(
-          "Error uploading image:",
-          responseData.message || "Unknown error"
+          "Error uploading image:" + responseData.message || "Unknown error"
         );
       } else {
         setUrl(responseData.url);
-        
         const res = await editUser({
           _id: editUserInfo._id,
           name,
@@ -85,7 +72,6 @@ const EditUserScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
     try {
       const res = await editUser({
         _id: editUserInfo._id,

@@ -4,7 +4,6 @@ const generateToken = (res, userId, isAdmin) => {
   const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
-
   if (isAdmin) {
     res.cookie("adminJwt", token, {
       httpOnly: true,

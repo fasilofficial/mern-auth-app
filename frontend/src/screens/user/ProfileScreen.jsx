@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, Button, Image } from "react-bootstrap";
-import FormContainer from "../components/FormContainer";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../components/Loader";
 import { toast } from "react-toastify";
-import { setCredentials } from "../slices/authSlice";
-import { useUpdateUserMutation } from "../slices/usersApiSlice";
+import { setCredentials } from "../../slices/authSlice";
+import { useUpdateUserMutation } from "../../slices/usersApiSlice";
+import FormContainer from "../../components/FormContainer";
 
 const ProfileScreen = () => {
   const [name, setName] = useState("");
@@ -96,10 +95,9 @@ const ProfileScreen = () => {
           password,
           avatar: url,
         }).unwrap();
-
         dispatch(setCredentials({ ...res }));
         toast.success("Profile updated");
-        navigate('/')
+        navigate("/");
       } catch (err) {
         toast.error(err?.data?.message || err.error);
       }

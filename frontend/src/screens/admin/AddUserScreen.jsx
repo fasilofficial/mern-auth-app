@@ -2,11 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-
-import FormContainer from "../components/FormContainer";
-import Loader from "../components/Loader";
-
-import { useAddUserMutation } from "../slices/adminApiSlice";
+import { useAddUserMutation } from "../../slices/adminApiSlice";
+import FormContainer from "../../components/FormContainer";
+import Loader from "../../components/Loader";
 
 const AddUserScreen = () => {
   const [name, setName] = useState("");

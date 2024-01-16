@@ -1,0 +1,3 @@
+# MERN AUTH APPLICATION
+
+A simple MERN stack application where users can register new accounts, log in to their accounts and update their details. Also the admin can add, edit, block and delete users, search users and edit user details. This application uses JWT for authentication and authorization, mongodb for database, redux toolkit for global state management and cloudinary for storing image file.

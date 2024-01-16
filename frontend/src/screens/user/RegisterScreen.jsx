@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import FormContainer from "../components/FormContainer";
 import { useDispatch, useSelector } from "react-redux";
-import { useAdminRegisterMutation } from "../slices/adminApiSlice";
-import Loader from "../components/Loader";
+import { useRegisterMutation } from "../../slices/usersApiSlice";
 import { toast } from "react-toastify";
-import { setAdminCredentials } from "../slices/adminAuthSlice";
+import { setCredentials } from "../../slices/authSlice";
+import Loader from "../../components/Loader";
+import FormContainer from "../../components/FormContainer";
 
-const AdminRegisterScreen = () => {
+const RegisterScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,15 +17,15 @@ const AdminRegisterScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [register, { isLoading, error }] = useAdminRegisterMutation();
+  const [register, { isLoading, error }] = useRegisterMutation();
 
-  const { adminInfo } = useSelector((state) => state.adminAuth);
+  const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (adminInfo) {
-      navigate("/admin");
+    if (userInfo) {
+      navigate("/");
     }
-  }, [navigate, adminInfo]);
+  }, [navigate, userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ const AdminRegisterScreen = () => {
     } else {
       try {
         const res = await register({ name, email, password }).unwrap();
-        dispatch(setAdminCredentials({ ...res }));
+        dispatch(setCredentials({ ...res }));
         toast.success("Register succesful");
         navigate("/");
       } catch (err) {
@@ -45,7 +45,7 @@ const AdminRegisterScreen = () => {
 
   return (
     <FormContainer>
-      <h1>Sign Up as Admin</h1>
+      <h1>Sign Up</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group className="my-2 " controlId="name">
           <Form.Label>Name</Form.Label>
@@ -100,4 +100,4 @@ const AdminRegisterScreen = () => {
   );
 };
 
-export default AdminRegisterScreen;
+export default RegisterScreen;

@@ -1,9 +1,5 @@
 import express from "express";
-
-const router = express.Router();
-
 import { protectAdmin } from "../middleware/authMiddleware.js";
-
 import {
   authAdmin,
   registerAdmin,
@@ -16,6 +12,9 @@ import {
   searchUsers,
 } from "../controllers/adminController.js";
 
+const router = express.Router();
+
+router.get("/users", protectAdmin, getUsersData);
 router.post("/", registerAdmin);
 router.post("/auth", authAdmin);
 router.post("/logout", logoutAdmin);
@@ -24,10 +23,5 @@ router.post("/block-user", protectAdmin, blockUser);
 router.post("/search", protectAdmin, searchUsers);
 router.put("/edit-user", protectAdmin, editUser);
 router.delete("/delete-user", protectAdmin, deleteUser);
-router.get("/users", protectAdmin, getUsersData);
-// router
-//   .route("/profile")
-//   .get(protectAdmin, getUserProfile)
-//   .put(protectAdmin, updateUserProfile);
 
 export default router;

@@ -3,13 +3,11 @@ import {
   Nav,
   Container,
   NavDropdown,
-  Badge,
   Image,
 } from "react-bootstrap";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-
 import { useAdminLogoutMutation } from "../slices/adminApiSlice";
 import { adminLogout } from "../slices/adminAuthSlice";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -36,6 +34,7 @@ const Header = () => {
       toast.err(err?.data?.message || err.message);
     }
   };
+  
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>

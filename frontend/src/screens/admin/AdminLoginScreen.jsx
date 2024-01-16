@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import FormContainer from "../components/FormContainer";
-import { useAdminLoginMutation } from "../slices/adminApiSlice";
-import { setAdminCredentials } from "../slices/adminAuthSlice";
+import { useAdminLoginMutation } from "../../slices/adminApiSlice";
+import { setAdminCredentials } from "../../slices/adminAuthSlice";
 import { toast } from "react-toastify";
-import Loader from "../components/Loader";
+import FormContainer from "../../components/FormContainer";
+import Loader from "../../components/Loader";
 
 const AdminLoginScreen = () => {
   const [email, setEmail] = useState("");

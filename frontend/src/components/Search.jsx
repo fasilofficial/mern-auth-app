@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
-import { useSearchUsersMutation } from "../slices/adminApiSlice";
 
 const Search = ({ handleSearch, searchLoading }) => {
   const [searchTerm, setSearchTerm] = useState("");

@@ -4,15 +4,15 @@ import {
   useBlockUserMutation,
   useDeleteUserMutation,
   useSearchUsersMutation,
-} from "../slices/adminApiSlice";
-import { Button, Col, Row, Table } from "react-bootstrap";
+} from "../../slices/adminApiSlice";
+import { Button, Table } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setEditUserCredentials } from "../slices/editUserSlice";
-import Loader from "../components/Loader";
+import { setEditUserCredentials } from "../../slices/editUserSlice";
 import { LinkContainer } from "react-router-bootstrap";
-import Search from "../components/Search";
+import Loader from "../../components/Loader";
+import Search from "../../components/Search";
 
 const AdminScreen = () => {
   const [getUsers, { usersLoading, usersError }] = useGetUsersMutation();
@@ -24,7 +24,6 @@ const AdminScreen = () => {
     useDeleteUserMutation();
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const [users, setUsers] = useState([]);
@@ -83,7 +82,6 @@ const AdminScreen = () => {
   return (
     <>
       <Search handleSearch={handleSearch} searchLoading={searchLoading} />
-
       {usersLoading && <Loader />}
       {users && (
         <>
@@ -132,14 +130,14 @@ const AdminScreen = () => {
                             variant="success"
                             onClick={() => handleBlockUser(user._id)}
                           >
-                            Unblock
+                            {blockUserLoading ? "Unblocking..." : "Unblock"}
                           </Button>
                         ) : (
                           <Button
                             variant="danger"
                             onClick={() => handleBlockUser(user._id)}
                           >
-                            Block
+                            {blockUserLoading ? "Blocking..." : "Block"}
                           </Button>
                         )}
                         <Button
@@ -147,7 +145,7 @@ const AdminScreen = () => {
                           variant="danger"
                           onClick={() => handleDeleteUser(user._id)}
                         >
-                          Delete
+                          {deleteUserLoading ? "Deleting..." : "Delete"}
                         </Button>
                       </td>
                     </tr>
